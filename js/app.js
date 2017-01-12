@@ -1,78 +1,87 @@
- $(document).ready(function(){
+$(document).ready(function(){
+  var btn=$("input");
+  for (var i=0; i<btn.length; i++) {
+    var btnColor=$(btn[i]).attr("data-color");
+    $(btn[i]).css("background", btnColor);
+  }
 
 
- $(':button').each(function(){
-    //pour chaque button on applique la fonction suiv
+    var paint=false;
+    var clickX, clickY;
+    context = document.getElementById('paper').getContext("2d");
 
-        var color = $(this).attr('data-color');
-        //crée une variable avec l'attribut data-color
-        //de ce button désigné par each
-        $(this).css('background', color);
-        // applique a CE button du css avec comme
-        //couleur la variable color
-        });
 
-$(':button').click(function(){
-  color = $(this).attr('data-color');
-});   // Attribue la couleur du carré au pinceau
+    $(':button').click(function(){
+      color = $(this).attr('data-color');
+    });   // Attribue la couleur du carré au pinceau
 
-context = document.getElementById('paper').getContext("2d");
+    //création de la gomme
+    $('gomme').click(function(){
 
-    // définie la fonction redraw
-function redraw(){
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height);  // Clears the canvas
+    });
 
-         // propriétés du crayon
-  context.strokeStyle = color;
-  context.lineJoin = "round";
-  context.lineWidth = 5;
+    //création de la gomme
+    $('.clear').click(function(){
+        location.reload();
+    });
 
-  for(var i=0; i < clickX.length; i++) {
+    /*
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);  // Clears the canvas
+
+    // propriétés du crayon
+    context.strokeStyle = color;
+    context.lineJoin = "round";
+    context.lineWidth = 5;
+
+    for(var i=0; i < clickX.length; i++) {
     context.beginPath();
     if(clickDrag[i] && i){
-      context.moveTo(clickX[i-1], clickY[i-1]);
-     }else{
-       context.moveTo(clickX[i]-1, clickY[i]);
-     }
-     context.lineTo(clickX[i], clickY[i]);
-     context.closePath();
-     context.stroke();
-  }
+    context.moveTo(clickX[i-1], clickY[i-1]);
+  }else{
+  context.moveTo(clickX[i]-1, clickY[i]);
 }
+context.lineTo(clickX[i], clickY[i]);
+context.closePath();
+context.stroke();
+}
+}*/
 
 //définit la fonction "dessiner en fonction des coordonnées de la souris"
 $('#paper').mousedown(function(e){
-  var mouseX = e.pageX - this.offsetLeft;
-  var mouseY = e.pageY - this.offsetTop;
   paint = true;
-  addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-  redraw();                   //cette ligne me semble optionnelle
-    });
+  redraw(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+
+});
 
 $('#paper').mousemove(function(e){
-   if(paint){
-     addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-     redraw();
-   }
- });
+  if(paint){
+    redraw(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+  }
+});
+
 $('#paper').mouseup(function(e){
   paint = false;
 });
 
 $('#paper').mouseleave(function(e){
-   paint = false;
- });
- var clickX = [];
- var clickY = [];
- var clickDrag = [];
- var paint;
+  paint = false;
+});
 
-  function addClick(x, y, dragging)
- {
-   clickX.push(x);
-   clickY.push(y);
-   clickDrag.push(dragging);
- }
+// définie la fonction redraw
+function redraw(x, y, dragging){
+  if(dragging) {
+    context.beginPath();
+    context.strokeStyle=color;
+    context.lineWidth="5";
+    context.lineJoin="round";
+    context.moveTo(clickX, clickY);
+    context.lineTo(x, y);
+    context.closePath();
+    context.stroke();
+  }
+  clickX=x;
+  clickY=y;
+}
 
 
 });
