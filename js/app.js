@@ -15,12 +15,9 @@ $(document).ready(function(){
       color = $(this).attr('data-color');
     });   // Attribue la couleur du carré au pinceau
 
-    //création de la gomme
-    $('gomme').click(function(){
 
-    });
 
-    //création de la gomme
+    //bouton clear area
     $('.clear').click(function(){
         location.reload();
     });
@@ -67,7 +64,7 @@ $('#paper').mouseleave(function(e){
   paint = false;
 });
 
-// définie la fonction redraw
+// définit la fonction redraw
 function redraw(x, y, dragging){
   if(dragging) {
     context.beginPath();
@@ -81,7 +78,23 @@ function redraw(x, y, dragging){
   }
   clickX=x;
   clickY=y;
+
 }
 
+//création de la gomme
+$('.gomme').click(function(){
+  if(dragging) {
+    context.beginPath();
+    context.strokeStyle=color;
+    context.lineWidth="5";
+    context.lineJoin="round";
+    context.moveTo(clickX, clickY);
+    context.lineTo(x, y);
+    context.closePath();
+    context.stroke();
+  }
+  clickX=x;
+  clickY=y;
+});
 
 });
