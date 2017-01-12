@@ -1,4 +1,6 @@
  $(document).ready(function(){
+
+
  $(':button').each(function(){
     //pour chaque button on applique la fonction suiv
 
@@ -10,21 +12,41 @@
         //couleur la variable color
         });
 
-        // test
-       var pinceau = $(this).attr('data-color');
-
 $(':button').click(function(){
   color = $(this).attr('data-color');
-});
+});   // Attribue la couleur du carré au pinceau
 
 context = document.getElementById('paper').getContext("2d");
 
+    // définie la fonction redraw
+function redraw(){
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);  // Clears the canvas
+
+         // propriétés du crayon
+  context.strokeStyle = color;
+  context.lineJoin = "round";
+  context.lineWidth = 5;
+
+  for(var i=0; i < clickX.length; i++) {
+    context.beginPath();
+    if(clickDrag[i] && i){
+      context.moveTo(clickX[i-1], clickY[i-1]);
+     }else{
+       context.moveTo(clickX[i]-1, clickY[i]);
+     }
+     context.lineTo(clickX[i], clickY[i]);
+     context.closePath();
+     context.stroke();
+  }
+}
+
+//définit la fonction "dessiner en fonction des coordonnées de la souris"
 $('#paper').mousedown(function(e){
   var mouseX = e.pageX - this.offsetLeft;
   var mouseY = e.pageY - this.offsetTop;
   paint = true;
   addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-  redraw();                   //redraw me semble optionnel
+  redraw();                   //cette ligne me semble optionnelle
     });
 
 $('#paper').mousemove(function(e){
@@ -40,9 +62,9 @@ $('#paper').mouseup(function(e){
 $('#paper').mouseleave(function(e){
    paint = false;
  });
- var clickX = new Array();
- var clickY = new Array();
- var clickDrag = new Array();
+ var clickX = [];
+ var clickY = [];
+ var clickDrag = [];
  var paint;
 
   function addClick(x, y, dragging)
@@ -51,25 +73,6 @@ $('#paper').mouseleave(function(e){
    clickY.push(y);
    clickDrag.push(dragging);
  }
- function redraw(){
-   context.clearRect(0, 0, context.canvas.width, context.canvas.height);  // Clears the canvas
 
-          // propriétés du crayon
-   context.strokeStyle = color;
-   context.lineJoin = "round";
-   context.lineWidth = 5;
-
-   for(var i=0; i < clickX.length; i++) {
-     context.beginPath();
-     if(clickDrag[i] && i){
-       context.moveTo(clickX[i-1], clickY[i-1]);
-      }else{
-        context.moveTo(clickX[i]-1, clickY[i]);
-      }
-      context.lineTo(clickX[i], clickY[i]);
-      context.closePath();
-      context.stroke();
-   }
- }
 
 });
