@@ -1,7 +1,41 @@
+body {
+	font-family: sans-serif;
+
+}
+
 #paper {
 	border:2px solid black;
-	background-color :
+	marging-left : 525px;
+	border-radius: 5%;
 }
 .color {
 	text-align: center;
+	height : 30px;
+}
+.logo{
+	float : right;
+	margin-top : 160px;
+	margin-right : 150px;
+}
+h1{
+	color : purple;
+	text-align : center;
+}
+
+
+
+.clear{
+	background-color: red;
+	color : white;
+}
+
+
+.pixel{
+	text-align: center;
+	border-radius: 100%;
+	background-color: purple;
+}
+
+.val{
+	border-radius: 100%;
 }
