@@ -5,11 +5,11 @@ $(document).ready(function(){
     $(btn[i]).css("background", btnColor);
   }
 
-
     var paint=false;
     var clickX, clickY;
     context = document.getElementById('paper').getContext("2d");
 
+    var color = "black";
 
     $(':button').click(function(){
       color = $(this).attr('data-color');
@@ -22,26 +22,7 @@ $(document).ready(function(){
         location.reload();
     });
 
-    /*
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);  // Clears the canvas
 
-    // propriétés du crayon
-    context.strokeStyle = color;
-    context.lineJoin = "round";
-    context.lineWidth = 5;
-
-    for(var i=0; i < clickX.length; i++) {
-    context.beginPath();
-    if(clickDrag[i] && i){
-    context.moveTo(clickX[i-1], clickY[i-1]);
-  }else{
-  context.moveTo(clickX[i]-1, clickY[i]);
-}
-context.lineTo(clickX[i], clickY[i]);
-context.closePath();
-context.stroke();
-}
-}*/
 
 //définit la fonction "dessiner en fonction des coordonnées de la souris"
 $('#paper').mousedown(function(e){
@@ -64,12 +45,17 @@ $('#paper').mouseleave(function(e){
   paint = false;
 });
 
+var largeur = "5";
+$('.val').click(function(){
+  largeur = $(this).attr("data");
+});
+
 // définit la fonction redraw
 function redraw(x, y, dragging){
   if(dragging) {
     context.beginPath();
     context.strokeStyle=color;
-    context.lineWidth="5";
+    context.lineWidth=largeur;
     context.lineJoin="round";
     context.moveTo(clickX, clickY);
     context.lineTo(x, y);
@@ -95,6 +81,37 @@ $('.gomme').click(function(){
   }
   clickX=x;
   clickY=y;
+  console.log('.gomme');
 });
 
+// changer le background
+if (('background').is(checked)){
+$('background-color')  === ':button data-color';
+} else{
+
+}
+
 });
+
+
+
+/*
+context.clearRect(0, 0, context.canvas.width, context.canvas.height);  // Clears the canvas
+
+// propriétés du crayon
+context.strokeStyle = color;
+context.lineJoin = "round";
+context.lineWidth = 5;
+
+for(var i=0; i < clickX.length; i++) {
+context.beginPath();
+if(clickDrag[i] && i){
+context.moveTo(clickX[i-1], clickY[i-1]);
+}else{
+context.moveTo(clickX[i]-1, clickY[i]);
+}
+context.lineTo(clickX[i], clickY[i]);
+context.closePath();
+context.stroke();
+}
+}*/
