@@ -6,11 +6,17 @@
 	<title>Canvas T-O-R</title>
 </head>
 <body>
+
+	<h1>Le Paint TH.O.R</h1>
 	<canvas id="paper" width="800" height="500"></canvas>
-	
+
+	<span>
+		<img class="logo" src="24412877.png" alt="logo simplon">
+	</span>
+
 	<div class="color">
 		<input type="button" data-color="black" class="color">
-		<input type="button" data-color="white" class="color">    	
+		<input type="button" data-color="white" class="color">
 		<input type="button" data-color="grey" class="color">
 		<input type="button" data-color="blue" class="color">
 		<input type="button" data-color="red" class="color">
@@ -21,10 +27,14 @@
 		<input type="button" data-color="brown" class="color">
 		<input type="button" data-color="navy" class="color">
 	</div>
-	<div class="outils">
-		<button>Gomme</button>
-		<button>Clear Area</button>
-	</div>
+
+
+	<div>
+	<button class="clear"> Clear area </button>
+	<button class="gomme" data-color="white"> Gomme </button>
+</div>
+
+
 
 	<div class="pixel">
 		<button class="val" data='5'>5 px</button>
@@ -33,7 +43,20 @@
 		<button class="val" data='50'>50 px</button>
 	</div>
 
+
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
+
+	<form>
+			<input type="checkbox" id="fondchange"> Changer la couleur du fond
+	</form>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
+
