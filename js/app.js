@@ -19,7 +19,7 @@ $(document).ready(function(){
       if($("#fondchange").is(':checked')){
         $('canvas').css('background-color', color);
       }
-  });   // Attribue la couleur du carré au pinceau
+  });
 
 
   //bouton clear area
@@ -88,7 +88,5 @@ $(document).ready(function(){
     clickY=y;
     console.log('.gomme');
   });
-
-
 
 });
