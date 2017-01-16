@@ -76,7 +76,7 @@ $(document).ready(function(){
   $('.gomme').click(function(){
     if(dragging) {
       context.beginPath();
-      context.strokeStyle=color;
+      context.strokeStyle= white ;
       context.lineWidth="5";
       context.lineJoin="round";
       context.moveTo(clickX, clickY);
